@@ -1,14 +1,52 @@
-import numpy as np
+
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import queue
+import logging
+
+logging.basicConfig(level=logging.INFO )
+
+class Color():
+  red='r'
+  black='k'
+  white='w'
+  yellow='y'
+  green='g'
+  blue='b'
+  cyan='c'
+  magenta='m'
+  
+class Shape():
+  point='.'
+  circle='o'
+  squre='s'
+  x='x'
+
 
 class Element():
-  def __init__(self,shape = '',color = '') -> None:
+  def __init__(self,shape:Shape =Shape.point,color:Color = Color.red) -> None:
+    self.shape = shape
+    self.color = color
+    self.x=[]
+    self.y=[]
     return
   
+  def AddPoints(self,x=[],y=[]):
+    self.x +=x
+    self.y +=y
+
+  def GetFormat(self):
+    return str(self.shape + self.color)
+  
+  
+  
+  
 class Frame():
-  def __init__(self,shape = '',color = '') -> None:
+  def __init__(self ) -> None:
+    self.elems:list[Element]=[]
+    return
+  
+  def AddElem(self,elem:Element):
+    self.elems.append(elem)
     return
      
 
@@ -20,30 +58,27 @@ class Animation():
     self.y_min = y_min
     self.y_max = y_max 
     self.interval = 100
-    self.fig, self.ax = plt.subplots()
-    self.__queue = queue.Queue()
+    self.fig, self.ax, = plt.subplots()
 
-    self.line, = self.ax.plot([self.x_min, self.x_max], \
-       [self.y_min, self.y_max])
     self.ax.set_title(self.title)
+    self.ax.set_xlim(xmin=x_min,xmax=x_max)
+    self.ax.set_ylim(ymin=y_min,ymax=y_max)
     # self.ax.grid()
 
-  def AddFrame(self,data:Element):
-    self.__queue.put(data)
+  def SetFrame(self,data:Frame):
+    self.frame = data
 
   def Animate(self,i):
-    # print(i,self.__queue.qsize())
-    if self.__queue.empty():
-      return self.line,
-
-    elem = self.__queue.get()
-    print(elem.x,elem.y)
-    self.line.set_xdata(elem.x)
-    self.line.set_ydata(elem.y)
-
-    return self.line,
+    try:
+      for i in self.frame.elems:
+        self.ax.plot(i.x,i.y,i.GetFormat())
+        logging.debug(i.x, i.y)
+      return self.ax,
+    except:
+      logging.warn('cant get frame')
+      return self.ax,
+    
   
   def Run(self):
-    print("queue size = " ,self.__queue.qsize())
-    anim = FuncAnimation(self.fig, self.Animate, interval=100, blit=True)
+    self.anim = FuncAnimation(self.fig, self.Animate, interval=100, blit=True)
     plt.show()
