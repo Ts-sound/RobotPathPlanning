@@ -6,11 +6,12 @@ from animation.Animation import *
 
 def RectanglePoints(start=[0,0],end=[1,1]):
   x,y=[],[]
-  for i in range(start[0],end[0]):
-    for j in range(start[1],end[1]):
+  for i in range(start[0],end[0]+1):
+    for j in range(start[1],end[1]+1):
       x.append(i)
       y.append(j)
   
+  logging.debug('x,y %s %s',x,y)
   return x,y
 
 class Map():
@@ -18,7 +19,6 @@ class Map():
       
       self.row = row
       self.col = col
-      self.frame = Frame()
       
       self.wall=Element(Shape.squre,Color.black)
       self.obstacle=Element(Shape.circle,Color.black)
@@ -30,17 +30,14 @@ class Map():
       self.wall.AddPoints(RectanglePoints((0,0),(0,col)))
       self.wall.AddPoints(RectanglePoints((0,col),(row,col)))
       
-      self.frame.AddElem(self.wall)
-      self.frame.AddElem(self.obstacle)
-      self.frame.AddElem(self.start)
-      self.frame.AddElem(self.end)
-      
       return
     
-    def SetObstacle(self,start=[0,0],end=[1,1]):
-      x,y = RectanglePoints(start,end)
+    def SetObstacle(self,p1=[0,0],p2=[1,1]):
+      x,y = RectanglePoints(p1,p2)
       self.obstacle.AddPoints(x,y)
       
     def SetPathStartEnd(self,start=[0,0],end=[1,1]):
       self.start.AddPoints(start)
       self.end.AddPoints(end)
+
+    

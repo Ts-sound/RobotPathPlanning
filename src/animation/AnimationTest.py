@@ -1,21 +1,32 @@
 from Animation import *
 import time
 
+def test_elem():
+    elem= Element()
+    elem.AddPoints([1,2,3],[1,2,3])
 
-chart =  Animation("test",0,80,0,80)
+    
+    return
 
-elem= Element()
-elem.AddPoints([1,2,3],[1,2,3])
+def test_anime():
+    chart =  Animation("test",0,80,0,80)
 
-frame =  Frame()
-frame.AddElem(elem)
+    elem= Element()
+    elem.AddPoints([1,2,3],[1,2,3])
 
-elem2= Element(Shape.squre,Color.black)
-elem2.AddPoints([4,4,5],[4,5,5])
-frame.AddElem(elem2)
+    frame =  Frame()
+    frame.AddElem(elem)
 
-chart.SetFrame(frame)
+    elem2= Element(Shape.squre,Color.black)
+    elem2.AddPoints([4,4,5],[4,5,5])
+    frame.AddElem(elem2)
 
-chart.Run()
+    chart.SetFrame(frame)
 
-print("end ")
+    chart.Run()
+
+    print("end ")
+    return
+
+
+test_elem()

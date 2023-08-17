@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import logging
 
-logging.basicConfig(level=logging.INFO )
+logging.basicConfig(level=logging.DEBUG )
 
 class Color():
   red='r'
@@ -31,8 +31,9 @@ class Element():
     return
   
   def AddPoints(self,x=[],y=[]):
-    self.x +=x
-    self.y +=y
+    self.x.extend(x)
+    self.y.extend(y)
+    logging.debug("points: %s %s",self.x,self.y)
 
   def GetFormat(self):
     return str(self.shape + self.color)
@@ -42,7 +43,7 @@ class Element():
   
 class Frame():
   def __init__(self ) -> None:
-    self.elems:list[Element]=[]
+    self.elems =[]
     return
   
   def AddElem(self,elem:Element):
@@ -61,8 +62,8 @@ class Animation():
     self.fig, self.ax, = plt.subplots()
 
     self.ax.set_title(self.title)
-    self.ax.set_xlim(xmin=x_min,xmax=x_max)
-    self.ax.set_ylim(ymin=y_min,ymax=y_max)
+    self.ax.set_xlim(x_min ,x_max )
+    self.ax.set_ylim(y_min ,y_max )
     # self.ax.grid()
 
   def SetFrame(self,data:Frame):
@@ -71,10 +72,12 @@ class Animation():
   def Animate(self,i):
     try:
       for i in self.frame.elems:
+        logging.debug("points: ",str(i.x), str(i.y))
         self.ax.plot(i.x,i.y,i.GetFormat())
-        logging.debug(i.x, i.y)
+
       return self.ax,
-    except:
+    except Exception as e:
+      logging.error(e)
       logging.warn('cant get frame')
       return self.ax,
     
