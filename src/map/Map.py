@@ -5,14 +5,13 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))  # 将父级目录加�
 from animation.Animation import *
 
 def RectanglePoints(start=[0,0],end=[1,1]):
-  x,y=[],[]
+  points=[]
   for i in range(start[0],end[0]+1):
     for j in range(start[1],end[1]+1):
-      x.append(i)
-      y.append(j)
+      points.append(Point(i,j))
   
-  logging.debug('x,y %s %s',x,y)
-  return x,y
+  logging.debug('x,y %s',points)
+  return points
 
 class Map():
     def __init__(self,row,col) -> None:
@@ -33,8 +32,8 @@ class Map():
       return
     
     def SetObstacle(self,p1=[0,0],p2=[1,1]):
-      x,y = RectanglePoints(p1,p2)
-      self.obstacle.AddPoints(x,y)
+      points = RectanglePoints(p1,p2)
+      self.obstacle.AddPoints(points)
       
     def SetPathStartEnd(self,start=[0,0],end=[1,1]):
       self.start.AddPoints(start)

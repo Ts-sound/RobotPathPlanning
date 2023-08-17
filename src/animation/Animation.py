@@ -25,6 +25,9 @@ class Point():
   def __init__(self,x,y ) -> None:
     self.x=x
     self.y=y
+  
+  def __repr__(self) -> str:
+    return self.x,self.y
 
 
 class Element():
@@ -84,7 +87,7 @@ class Animation():
     try:
       for i in self.frame.elems:
         x,y = i.ToXYlist()
-        logging.debug("points: ",str(x), str(y))
+        logging.debug("points: %s %s",x,y)
         self.ax.plot(x,y,i.GetFormat())
 
       return self.ax,
