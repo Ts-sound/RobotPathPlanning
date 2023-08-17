@@ -21,22 +21,33 @@ class Shape():
   squre='s'
   x='x'
 
+class Point():
+  def __init__(self,x,y ) -> None:
+    self.x=x
+    self.y=y
+
 
 class Element():
   def __init__(self,shape:Shape =Shape.point,color:Color = Color.red) -> None:
     self.shape = shape
     self.color = color
-    self.x=[]
-    self.y=[]
+    self.points = []
     return
   
-  def AddPoints(self,x=[],y=[]):
-    self.x.extend(x)
-    self.y.extend(y)
-    logging.debug("points: %s %s",self.x,self.y)
+  def AddPoints(self,points):
+    self.points.extend(points)
+    logging.debug("points: %s",self.points)
 
   def GetFormat(self):
     return str(self.shape + self.color)
+  
+  def ToXYlist(self):
+    x,y=[],[]
+    for i in self.points:
+      x.append(i.x)
+      y.append(i.y)
+
+    return x,y
   
   
   
@@ -72,8 +83,9 @@ class Animation():
   def Animate(self,i):
     try:
       for i in self.frame.elems:
-        logging.debug("points: ",str(i.x), str(i.y))
-        self.ax.plot(i.x,i.y,i.GetFormat())
+        x,y = i.ToXYlist()
+        logging.debug("points: ",str(x), str(y))
+        self.ax.plot(x,y,i.GetFormat())
 
       return self.ax,
     except Exception as e:
