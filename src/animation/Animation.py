@@ -1,9 +1,11 @@
 
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import logging
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[1]))  # 将父级目录加入执行目录列表
 
-logging.basicConfig(level=logging.DEBUG )
+from common.log import logger
 
 class Color():
   red='r'
@@ -39,7 +41,7 @@ class Element():
   
   def AddPoints(self,points):
     self.points.extend(points)
-    logging.debug("points: %s",self.points)
+    logger.debug("points: %s",self.points)
 
   def GetFormat(self):
     return str(self.shape + self.color)
@@ -87,13 +89,13 @@ class Animation():
     try:
       for i in self.frame.elems:
         x,y = i.ToXYlist()
-        logging.debug("points: %s %s",x,y)
+        logger.debug("points: %s %s",x,y)
         self.ax.plot(x,y,i.GetFormat())
 
       return self.ax,
     except Exception as e:
-      logging.error(e)
-      logging.warn('cant get frame')
+      logger.error(e)
+      logger.warn('cant get frame')
       return self.ax,
     
   
