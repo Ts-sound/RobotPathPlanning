@@ -17,6 +17,7 @@ def test_anime():
     p1=Point(1,1)
     p2=Point(2,2)
     elem.AddPoints([p1,p2])
+    elem.AddPoints([Point(7,7),Point(8,8)])
 
     frame =  Frame()
     frame.AddElem(elem)

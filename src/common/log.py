@@ -37,7 +37,7 @@ class Logger:
 
 
 global logger
-logger = Logger("default",logging.INFO)
+logger = Logger("default",logging.DEBUG)
 
 
 if __name__ == '__main__':

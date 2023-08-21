@@ -10,7 +10,7 @@ def RectanglePoints(start=[0,0],end=[1,1]):
     for j in range(start[1],end[1]+1):
       points.append(Point(i,j))
   
-  logging.debug('x,y %s',points)
+  logger.debug('x,y %s',points)
   return points
 
 class Map():

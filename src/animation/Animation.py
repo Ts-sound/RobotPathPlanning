@@ -29,7 +29,8 @@ class Point():
     self.y=y
   
   def __repr__(self) -> str:
-    return self.x,self.y
+    s ='[ '+str(self.x)+','+ str(self.y) +']'
+    return s
 
 
 class Element():
@@ -40,7 +41,7 @@ class Element():
     return
   
   def AddPoints(self,points):
-    self.points.extend(points)
+    self.points +=points
     logger.debug("points: %s",self.points)
 
   def GetFormat(self):
