@@ -35,7 +35,7 @@ class Map():
       points = RectanglePoints(p1,p2)
       self.obstacle.AddPoints(points)
       
-    def SetPathStartEnd(self,start=[0,0],end=[1,1]):
+    def SetPathStartEnd(self,start=Point(0,0),end=Point(1,1)):
       self.start.AddPoints(start)
       self.end.AddPoints(end)
 

@@ -17,12 +17,9 @@ class MapView(Map):
 
 
     def DrawFrame(self):
-        elem= Element()
-        elem.AddPoints([1,2,3],[1,2,3])
-        self.frame.AddElem(elem)
-
         self.frame.AddElem(self.wall)
         self.frame.AddElem(self.obstacle)
+        self.SetPathStartEnd(Point(10,10),Point(90,90))
         self.frame.AddElem(self.start)
         self.frame.AddElem(self.end)
 
