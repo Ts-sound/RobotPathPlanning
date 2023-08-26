@@ -22,7 +22,8 @@ class Map():
       self.wall=Element(Shape.squre,Color.black)
       self.obstacle=Element(Shape.circle,Color.black)
       self.start = Element(Shape.squre,Color.blue)
-      self.end = Element(Shape.x,Color.blue)
+      self.end = Element(Shape.x,Color.red)
+      self.path = Element(Shape.circle,Color.yellow)
       
       self.wall.AddPoints(RectanglePoints((0,0),(row,0)))
       self.wall.AddPoints(RectanglePoints((row,0),(row,col)))
@@ -36,7 +37,10 @@ class Map():
       self.obstacle.AddPoints(points)
       
     def SetPathStartEnd(self,start=Point(0,0),end=Point(1,1)):
-      self.start.AddPoints(start)
-      self.end.AddPoints(end)
+      self.start.AddPoints([start])
+      self.end.AddPoints([end])
+      
+    def ChangePath(self,points:list[Point]):
+      self.path.AddPoints(points)
 
     

@@ -41,8 +41,11 @@ class Element():
     return
   
   def AddPoints(self,points):
-    self.points +=points
+    self.points.extend(points)
     logger.debug("points: %s",self.points)
+    
+  def Clear(self):
+    self.points.clear()
 
   def GetFormat(self):
     return str(self.shape + self.color)

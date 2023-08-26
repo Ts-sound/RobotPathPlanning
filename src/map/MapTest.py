@@ -24,4 +24,4 @@ def test_rectangle():
     RectanglePoints([0,0],[100,0])
 
 
-test_rectangle()
+test_map()

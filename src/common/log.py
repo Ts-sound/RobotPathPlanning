@@ -19,7 +19,7 @@ class Logger:
         return self.logger
 
 global logger
-logger = Logger("default",logging.DEBUG).get()
+logger = Logger("default",logging.INFO).get()
 
 
 if __name__ == '__main__':
